@@ -14,6 +14,10 @@ gulp.task('lint', function () {
         .pipe(eslint.failOnError());
 });
 
+gulp.task('default', ['lint'], function () {
+    // This will only run if the lint task is successful...
+});
+
 gulp.task('build', ['lint'], function () {
     // This will only run if the lint task is successful...
 });
