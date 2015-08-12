@@ -8,7 +8,6 @@ if ('development' == app.get('env')) {
     require('./environment');
 }
 
-
 // routes
 require('./../app/core/routes')(app);
 
