@@ -1,7 +1,6 @@
 var express = require('express');
 var app     = express();
 
-
 if ('development' == app.get('env')) {
     // load environment configuration
     require('./environment');
