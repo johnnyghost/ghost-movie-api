@@ -1,6 +1,7 @@
 var assert     = require ('assert');
 var lang       = require('mout/lang');
 var mixIn      = require('mout/object/mixIn');
+var clone      = require('mout/lang/clone');
 var tmdbConfig = require('./../config').clients.tmdb;
 
 /**
@@ -8,7 +9,7 @@ var tmdbConfig = require('./../config').clients.tmdb;
  *
  * @type {Object}
  */
-var requestOptions = {
+var requestDefault = {
     host: tmdbConfig.baseUrl,
     path: '/' + tmdbConfig.version,
     query: {
@@ -44,6 +45,8 @@ TMDBClient.prototype.searchMovie = function searchMovie(query) {
     // pre-conditions
     assert(lang.isString(query), 'query should exist and be a string');
 
+    var requestOptions = clone(requestDefault);
+
     requestOptions.method = 'GET';
     requestOptions.path += '/search/movie';
 
@@ -72,6 +75,8 @@ TMDBClient.prototype.getMovie = function getMovie(movieId) {
 
     // pre-conditions
     assert(lang.isString(movieId), 'query should exist and be a string');
+
+    var requestOptions = clone(requestDefault);
 
     requestOptions.method = 'GET';
     requestOptions.path += '/movie/' + movieId;
