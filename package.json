@@ -10,12 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "di": "^2.0.0-pre-12"
   },
   "devDependencies": {
     "bluebird": "^2.9.34",
     "bunyan": "^1.4.0",
-    "di": "^2.0.0-pre-12",
     "eslint": "^1.1.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
