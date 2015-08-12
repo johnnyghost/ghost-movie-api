@@ -1,18 +1,16 @@
-var responseHelper = require('./../../core/helpers').response;
-var TMDBClient = require('./../../core/clients/tmdb-client');
+/**
+ *
+ */
+function MovieService(TMDBClient) {
+    this.tmdbClient = TMDBClient;
+}
 
-module.exports = {
-
-    /**
-     * [getAll description]
-     * @return {[type]} [description]
-     */
-    search: function (query) {
-        var tmdb = new TMDBClient();
-        return tmdb.searchMovie(query).then(function searchMovieSuccessHandler(response) {
-            return responseHelper.parseSuccessResponse(response);
-        }).catch(function searchMovieErrorHandler(error) {
-            return responseHelper.parseErrorResponse(error);
-        });
-    }
+/**
+ * [getAll description]
+ * @return {[type]} [description]
+ */
+MovieService.prototype.search = function (query) {
+    return this.tmdbClient.searchMovie(query);
 };
+
+module.exports = MovieService;

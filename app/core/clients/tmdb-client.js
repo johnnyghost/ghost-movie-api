@@ -1,11 +1,11 @@
-var assert        = require ('assert');
-var lang          = require('mout/lang');
-var mixIn         = require('mout/object/mixIn');
-var tmdbConfig    = require('./../config').clients.tmdb;
-var httpTransport = require('./../transport').http;
+var assert     = require ('assert');
+var lang       = require('mout/lang');
+var mixIn      = require('mout/object/mixIn');
+var tmdbConfig = require('./../config').clients.tmdb;
 
 /**
- * http transport tmdb default options.
+ * Http transport tmdb default options.
+ *
  * @type {Object}
  */
 var requestOptions = {
@@ -17,36 +17,44 @@ var requestOptions = {
 };
 
 /**
- * [TMDBClient description]
+ * TMDB client.
+ * A abstraction to the movie database api.
+ * @see http://docs.themoviedb.apiary.io
+ *
+ * @constructor
+ *
+ * @method TMDBClient
+ * @param  {HttpTransport} httpTransport a instance of httpTransport
  */
-function TMDBClient() {}
+function TMDBClient(httpTransport) {
+    this.transport = httpTransport;
+}
 
-TMDBClient.prototype = {
+/**
+ * Search for movies by title.
+ *
+ * @param  {String} query A CGI escaped string.
+ * @return {Promise<Array|HttpError>)} resolved promise with an array of movies and
+ *                                     rejected with an http error
+ */
+TMDBClient.prototype.searchMovie = function(query) {
 
-    /**
-     * [function description]
-     * @param  {[type]} query [description]
-     * @return {[type]}       [description]
-     */
-    searchMovie: function(query) {
+    // pre-conditions
+    assert(lang.isString(query), 'query should exist and be a string');
 
-        // pre-conditions
-        assert(lang.isString(query), 'query should exist and be a string');
+    requestOptions.method = 'GET';
+    requestOptions.path += '/search/movie';
 
-        requestOptions.method = 'GET';
-        requestOptions.path += '/search/movie';
+    mixIn(requestOptions.query, {
+        query: query
+    });
 
-        mixIn(requestOptions.query, {
-            query: query
-        });
-
-        return httpTransport(requestOptions).then(function (response) {
-            if (!response.results) {
-                return;
-            }
-            return response.results;
-        });
-    }
+    return this.transport(requestOptions).then(function (response) {
+        if (!response.results) {
+            return;
+        }
+        return response.results;
+    });
 };
 
 module.exports = TMDBClient;
