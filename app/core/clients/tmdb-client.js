@@ -33,11 +33,13 @@ function TMDBClient(httpTransport) {
 /**
  * Search for movies by title.
  *
+ * @method searchMovie
+ *
  * @param  {String} query A CGI escaped string.
  * @return {Promise<Array|HttpError>)} resolved promise with an array of movies and
  *                                     rejected with an http error
  */
-TMDBClient.prototype.searchMovie = function(query) {
+TMDBClient.prototype.searchMovie = function searchMovie(query) {
 
     // pre-conditions
     assert(lang.isString(query), 'query should exist and be a string');
@@ -54,6 +56,28 @@ TMDBClient.prototype.searchMovie = function(query) {
             return;
         }
         return response.results;
+    });
+};
+
+/**
+ * Get the basic movie information for a specific movie id.
+ *
+ * @method getMovie
+ *
+ * @param  {String} movieId The movie id
+ * @return {Promise<Array|HttpError>)} resolved promise with a movie object and
+ *                                     rejected with an http error
+ */
+TMDBClient.prototype.getMovie = function getMovie(movieId) {
+
+    // pre-conditions
+    assert(lang.isString(movieId), 'query should exist and be a string');
+
+    requestOptions.method = 'GET';
+    requestOptions.path += '/movie/' + movieId;
+
+    return this.transport(requestOptions).then(function (response) {
+        return response;
     });
 };
 
