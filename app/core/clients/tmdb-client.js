@@ -55,7 +55,6 @@ TMDBClient.prototype.searchMovie = function searchMovie(query) {
     });
 
     return this.transport(requestOptions).then(function (response) {
-        console.log(response);
         if (!response.results) {
             return;
         }
