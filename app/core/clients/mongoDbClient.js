@@ -5,7 +5,7 @@ var mongoConfig = require('./../config').clients.mongodb;
 Promise.promisifyAll(mongoose);
 
 mongoose.connectAsync(mongoConfig.uri).catch(function (err) {
-    console.log(err);
+    return Promise.reject(err);
 });
 
 module.exports = mongoose;

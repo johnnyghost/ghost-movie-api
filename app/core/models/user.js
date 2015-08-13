@@ -7,7 +7,8 @@ var userSchema = new mongoDbClient.Schema({
         first: String,
         last: {
             type: String,
-            trim: true
+            trim: true,
+            required: true
         }
     },
     age: { type: Number, min: 0}

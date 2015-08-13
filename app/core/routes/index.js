@@ -1,7 +1,6 @@
 module.exports = function (app) {
     require('./../../modules/movies/route')(app);
 
-
     var User = require('./../models/user');
 
     app.get('/users', function (req, res) {
@@ -16,7 +15,7 @@ module.exports = function (app) {
         });
 
         // Saving it to the database.
-        johndoe.save();
+        johndoe.saveAsync();
         res.json({
             a:2
         });
