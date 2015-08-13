@@ -16,9 +16,9 @@ module.exports = function (app) {
         });
 
         // Saving it to the database.
-        johndoe.save(function (err) {if (err) console.log ('Error on save!')});
+        johndoe.save();
         res.json({
             a:2
-        })
-    })
+        });
+    });
 };
