@@ -15,6 +15,7 @@
     "di": "2.0.0-pre-12",
     "express": "4.13.3",
     "mout": "0.11.0",
+    "mongoose": "^4.1.2",
     "node-env-file": "0.1.7"
   },
   "devDependencies": {
