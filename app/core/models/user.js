@@ -1,4 +1,4 @@
-var mongoDbClient = require('./../clients/mongoDbClient');
+var mongoDbClient = require('./../clients/mongo-client');
 
 // // This is the schema.  Note the types, validation and trim
 // // statements.  They enforce useful constraints on the data.
