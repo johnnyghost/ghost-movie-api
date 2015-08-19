@@ -1,4 +1,4 @@
-var assert     = require ('assert');
+var assert     = require('assert');
 var lang       = require('mout/lang');
 var mixIn      = require('mout/object/mixIn');
 var clone      = require('mout/lang/clone');
